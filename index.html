@@ -1236,24 +1236,34 @@
       </div>
     </div>
     <!-- End of Accordion -->
+     
+ <!-- Submit & Generate Summary Buttons -->
+ <div class="text-center mb-4">
+    <!-- Original Submit Button -->
+    <button type="submit" class="btn btn-primary">
+      Submit ICU Note
+    </button>
 
-    <!-- Final Submit Button -->
-    <div class="text-center mb-4">
-        <button type="button" class="btn btn-success" id="generateSummaryBtn">
-            Generate Text Summary
-          </button>          
-    </div>
-  </form>
-  <!-- END FORM -->
+    <!-- NEW: Generate Text Summary Button -->
+    <button 
+      type="button" 
+      class="btn btn-success ms-3" 
+      id="generateSummaryBtn"
+    >
+      Generate Text Summary
+    </button>
+  </div>
+</form>
+<!-- END FORM -->
 
 </div>
 
 <!-- Bootstrap JS Bundle -->
 <script 
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
 </script>
 
-<!-- Inline JavaScript (or move to script.js) -->
+<!-- Inline JavaScript -->
 <script>
 // Grab the main form
 const icuForm = document.getElementById('icuForm');
@@ -1262,67 +1272,68 @@ const icuForm = document.getElementById('icuForm');
 const analgesiaFentanyl = document.getElementById('analgesiaFentanyl');
 const fentanylRate = document.getElementById('fentanylRate');
 analgesiaFentanyl.addEventListener('change', () => {
-  fentanylRate.disabled = !analgesiaFentanyl.checked;
+fentanylRate.disabled = !analgesiaFentanyl.checked;
 });
 
 const analgesiaKetamine = document.getElementById('analgesiaKetamine');
 const ketamineRate = document.getElementById('ketamineRate');
 analgesiaKetamine.addEventListener('change', () => {
-  ketamineRate.disabled = !analgesiaKetamine.checked;
+ketamineRate.disabled = !analgesiaKetamine.checked;
 });
 
 const sedationMidazolam = document.getElementById('sedationMidazolam');
 const midazolamRate = document.getElementById('midazolamRate');
 sedationMidazolam.addEventListener('change', () => {
-  midazolamRate.disabled = !sedationMidazolam.checked;
+midazolamRate.disabled = !sedationMidazolam.checked;
 });
 
 const sedationPropofol = document.getElementById('sedationPropofol');
 const propofolRate = document.getElementById('propofolRate');
 sedationPropofol.addEventListener('change', () => {
-  propofolRate.disabled = !sedationPropofol.checked;
+propofolRate.disabled = !sedationPropofol.checked;
 });
 
 const paralyticRocuronium = document.getElementById('paralyticRocuronium');
 const rocuroniumRate = document.getElementById('rocuroniumRate');
 paralyticRocuronium.addEventListener('change', () => {
-  rocuroniumRate.disabled = !paralyticRocuronium.checked;
+rocuroniumRate.disabled = !paralyticRocuronium.checked;
 });
 
 // 2. Vasoactive checkboxes
 const vasoNorad = document.getElementById('vasoNorad');
 const noradRate = document.getElementById('noradRate');
 vasoNorad.addEventListener('change', () => {
-  noradRate.disabled = !vasoNorad.checked;
+noradRate.disabled = !vasoNorad.checked;
 });
 
 const vasoVasopressin = document.getElementById('vasoVasopressin');
 const vasopressinRate = document.getElementById('vasopressinRate');
 vasoVasopressin.addEventListener('change', () => {
-  vasopressinRate.disabled = !vasoVasopressin.checked;
+vasopressinRate.disabled = !vasoVasopressin.checked;
 });
 
 const vasoDopamine = document.getElementById('vasoDopamine');
 const dopamineRate = document.getElementById('dopamineRate');
 vasoDopamine.addEventListener('change', () => {
-  dopamineRate.disabled = !vasoDopamine.checked;
+dopamineRate.disabled = !vasoDopamine.checked;
 });
 
 const vasoAdrenaline = document.getElementById('vasoAdrenaline');
 const adrenalineRate = document.getElementById('adrenalineRate');
 vasoAdrenaline.addEventListener('change', () => {
-  adrenalineRate.disabled = !vasoAdrenaline.checked;
+adrenalineRate.disabled = !vasoAdrenaline.checked;
 });
 
 const vasoDobutamine = document.getElementById('vasoDobutamine');
 const dobutamineRate = document.getElementById('dobutamineRate');
 vasoDobutamine.addEventListener('change', () => {
-  dobutamineRate.disabled = !vasoDobutamine.checked;
+dobutamineRate.disabled = !vasoDobutamine.checked;
 });
 
 // 3. CRRT Anticoagulant
 const crrtAnticoagulant = document.getElementById('crrtAnticoagulant');
 const heparinRateCRRT = document.getElementById('heparinRateCRRT');
+if (crrtAnticoagulant) { 
 crrtAnticoagulant.addEventListener('change', () => {
   if (crrtAnticoagulant.value === 'Heparin') {
     heparinRateCRRT.disabled = false;
@@ -1331,6 +1342,7 @@ crrtAnticoagulant.addEventListener('change', () => {
     heparinRateCRRT.value = '';
   }
 });
+}
 
 // 4. Anticoagulant Options
 const anticoagulantChoice = document.getElementById('anticoagulantChoice');
@@ -1339,6 +1351,7 @@ const heparinFrequency = document.getElementById('heparinFrequency');
 const enoxaparinDose = document.getElementById('enoxaparinDose');
 const enoxaparinFrequency = document.getElementById('enoxaparinFrequency');
 
+if (anticoagulantChoice) {
 anticoagulantChoice.addEventListener('change', () => {
   if (anticoagulantChoice.value === 'Heparin SC') {
     // Enable Heparin fields
@@ -1370,42 +1383,96 @@ anticoagulantChoice.addEventListener('change', () => {
     enoxaparinFrequency.value = '';
   }
 });
+}
 
 // 5. Lines checkboxes
 const lineCentral = document.getElementById('lineCentral');
 const centralDate = document.getElementById('centralDate');
+if (lineCentral) {
 lineCentral.addEventListener('change', () => {
   centralDate.disabled = !lineCentral.checked;
   if (!lineCentral.checked) centralDate.value = '';
 });
+}
 
 const lineHDcatheter = document.getElementById('lineHDcatheter');
 const hdCatheterDate = document.getElementById('hdCatheterDate');
+if (lineHDcatheter) {
 lineHDcatheter.addEventListener('change', () => {
   hdCatheterDate.disabled = !lineHDcatheter.checked;
   if (!lineHDcatheter.checked) hdCatheterDate.value = '';
 });
+}
 
 const lineFoley = document.getElementById('lineFoley');
 const foleyDate = document.getElementById('foleyDate');
+if (lineFoley) {
 lineFoley.addEventListener('change', () => {
   foleyDate.disabled = !lineFoley.checked;
   if (!lineFoley.checked) foleyDate.value = '';
 });
+}
 
-// 6. Form Submit Handler
+// 6. Form Submit Handler (unchanged)
 icuForm.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent page refresh
+event.preventDefault(); // Prevent page refresh
 
-  // Collect form data
-  const formData = new FormData(icuForm);
+// Collect form data
+const formData = new FormData(icuForm);
 
-  // Log data for demonstration
-  console.log('--- ICU Progress Note Data ---');
-  for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
-  }
-  alert('ICU Progress Note submitted! Check console for data.');
+// Log data for demonstration
+console.log('--- ICU Progress Note Data ---');
+for (let [key, value] of formData.entries()) {
+  console.log(`${key}: ${value}`);
+}
+alert('ICU Progress Note submitted! Check console for data.');
+});
+
+// 7. NEW: Generate Text Summary Handler
+const generateSummaryBtn = document.getElementById('generateSummaryBtn');
+
+generateSummaryBtn.addEventListener('click', function() {
+// Gather form data
+const formData = new FormData(icuForm);
+
+// Build a text summary
+let summary = "ICU PROGRESS NOTE - TEXT SUMMARY\n\n";
+
+// Example: Patient Info
+summary += `Patient Name/ID: ${formData.get('patientName') || ''}\n`;
+summary += `Age: ${formData.get('patientAge') || ''}\n`;
+summary += `Sex: ${formData.get('patientSex') || ''}\n`;
+summary += `ICU Day: ${formData.get('icuDay') || ''}\n`;
+summary += `Brief History: ${formData.get('briefHistory') || ''}\n`;
+summary += `Overnight Events: ${formData.get('overnightEvents') || ''}\n\n`;
+
+// Example: CNS
+summary += "[CNS]\n";
+summary += `GCS Eye: ${formData.get('gcsEye') || ''}\n`;
+summary += `GCS Verbal: ${formData.get('gcsVerbal') || ''}\n`;
+summary += `GCS Motor: ${formData.get('gcsMotor') || ''}\n`;
+summary += `RASS Score: ${formData.get('rassScore') || ''}\n`;
+
+// (You can continue with sedation, analgesia, lines, etc.)
+
+// Open a new window to display the summary
+const newWindow = window.open('', '_blank', 'width=800,height=600');
+if (!newWindow) {
+  alert("Pop-up blocked! Please allow pop-ups to see the summary.");
+  return;
+}
+
+newWindow.document.write(`
+  <html>
+    <head>
+      <title>ICU Progress Note Summary</title>
+    </head>
+    <body style="font-family:monospace; white-space:pre;">
+      ${summary}
+    </body>
+  </html>
+`);
+newWindow.document.close();
 });
 </script>
 </body>
