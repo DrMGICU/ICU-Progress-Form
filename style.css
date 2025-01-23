@@ -1,0 +1,15 @@
+/* style.css */
+
+/* Change card header color and text styling */
+.card-header {
+    background-color: #004b8d;
+    color: #fff;
+    font-weight: bold;
+  }
+  .accordion-button {
+    background-color: #2d3e50;
+    color: #fff;
+  }
+  
+  /* You can add any additional custom styles below */
+  

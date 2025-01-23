@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ICU Progress Note (Two-Column + Accordion + New Fields)</title>
+  
+  <!-- Bootstrap 5 CSS (via CDN) -->
+  <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  >
+
+  <!-- (Optional) Your custom CSS 
+  <link rel="stylesheet" href="style.css">
+  -->
+</head>
+<body class="bg-light">
+<div class="container my-4">
+  <h1 class="text-center mb-4">ICU Progress Note</h1>
+
+  <!-- START FORM -->
+  <form id="icuForm">
+
+    <!-- 1. Patient Demographics & Brief Info -->
+    <div class="card mb-3">
+      <div class="card-header">1. Patient Demographics & Brief Info</div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="patientName" class="form-label">Patient Name / ID</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="patientName" 
+              placeholder="John Doe / ID12345"
+            >
+          </div>
+          <div class="col-md-3">
+            <label for="patientAge" class="form-label">Age</label>
+            <input 
+              type="number" 
+              class="form-control" 
+              id="patientAge" 
+              placeholder="e.g. 65"
+            >
+          </div>
+          <div class="col-md-3">
+            <label for="patientSex" class="form-label">Sex</label>
+            <select class="form-select" id="patientSex">
+              <option value="">Choose...</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="icuDay" class="form-label">ICU Day</label>
+            <input 
+              type="number" 
+              class="form-control" 
+              id="icuDay" 
+              placeholder="e.g. 5"
+            >
+          </div>
+          <div class="col-md-8">
+            <label for="briefHistory" class="form-label">
+              Brief History / Reason for ICU Admission
+            </label>
+            <textarea 
+              class="form-control" 
+              id="briefHistory" 
+              rows="2"
+              placeholder="Summarize history here..."
+            ></textarea>
+          </div>
+          <div class="col-md-12">
+            <label for="overnightEvents" class="form-label">
+              Overnight Events / Significant Changes
+            </label>
+            <textarea 
+              class="form-control" 
+              id="overnightEvents" 
+              rows="2"
+              placeholder="Notable updates since last note..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion for remaining sections -->
+    <div class="accordion mb-3" id="icuAccordion">
+
+      <!-- 2. CNS -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingCNS">
+          <button 
+            class="accordion-button" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseCNS" 
+            aria-expanded="true" 
+            aria-controls="collapseCNS"
+          >
+            2. Central Nervous System (CNS)
+          </button>
+        </h2>
+        <div 
+          id="collapseCNS" 
+          class="accordion-collapse collapse show" 
+          aria-labelledby="headingCNS" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <div class="row g-3">
+              <!-- GCS -->
+              <div class="col-md-12">
+                <label class="form-label fw-bold">GCS Components:</label>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="gcsEye" class="form-label">Eye (E)</label>
+                    <select class="form-select" id="gcsEye">
+                      <option value="">Select Eye...</option>
+                      <option value="4">4 (Spontaneous)</option>
+                      <option value="3">3 (To speech)</option>
+                      <option value="2">2 (To pain)</option>
+                      <option value="1">1 (None)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="gcsVerbal" class="form-label">Verbal (V)</label>
+                    <select class="form-select" id="gcsVerbal">
+                      <option value="">Select Verbal...</option>
+                      <option value="5">5 (Oriented)</option>
+                      <option value="4">4 (Confused)</option>
+                      <option value="3">3 (Inappropriate words)</option>
+                      <option value="2">2 (Incomprehensible)</option>
+                      <option value="1">1 (None)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="gcsMotor" class="form-label">Motor (M)</label>
+                    <select class="form-select" id="gcsMotor">
+                      <option value="">Select Motor...</option>
+                      <option value="6">6 (Obeys commands)</option>
+                      <option value="5">5 (Localizes pain)</option>
+                      <option value="4">4 (Withdraws to pain)</option>
+                      <option value="3">3 (Flexion to pain)</option>
+                      <option value="2">2 (Extension to pain)</option>
+                      <option value="1">1 (None)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RASS -->
+              <div class="col-md-6">
+                <label for="rassScore" class="form-label">RASS Score</label>
+                <select class="form-select" id="rassScore">
+                  <option value="">Choose RASS...</option>
+                  <option value="+4">+4 (Combative)</option>
+                  <option value="+3">+3 (Very agitated)</option>
+                  <option value="+2">+2 (Agitated)</option>
+                  <option value="+1">+1 (Restless)</option>
+                  <option value="0">0 (Alert & Calm)</option>
+                  <option value="-1">-1 (Drowsy)</option>
+                  <option value="-2">-2 (Light sedation)</option>
+                  <option value="-3">-3 (Moderate sedation)</option>
+                  <option value="-4">-4 (Deep sedation)</option>
+                  <option value="-5">-5 (Unarousable)</option>
+                </select>
+              </div>
+
+              <!-- IV Analgesia (multiple checkboxes) -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold">
+                  IV Analgesia (Select all that apply):
+                </label>
+                <div class="form-check">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    value="Fentanyl" 
+                    id="analgesiaFentanyl"
+                  >
+                  <label class="form-check-label" for="analgesiaFentanyl">
+                    Fentanyl (mcg/hour)
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="fentanylRate" 
+                    placeholder="Rate (mcg/h)" 
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+                <div class="form-check mt-2">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    value="Ketamine" 
+                    id="analgesiaKetamine"
+                  >
+                  <label class="form-check-label" for="analgesiaKetamine">
+                    Ketamine (mg/hour)
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="ketamineRate" 
+                    placeholder="Rate (mg/h)"
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+              </div>
+
+              <!-- IV Sedation (multiple checkboxes) -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold">
+                  IV Sedation (Select all that apply):
+                </label>
+                <div class="form-check">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    value="Midazolam" 
+                    id="sedationMidazolam"
+                  >
+                  <label class="form-check-label" for="sedationMidazolam">
+                    Midazolam (mg/hour)
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="midazolamRate" 
+                    placeholder="Rate (mg/h)"
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+                <div class="form-check mt-2">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    value="Propofol" 
+                    id="sedationPropofol"
+                  >
+                  <label class="form-check-label" for="sedationPropofol">
+                    Propofol (mg/hour)
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="propofolRate" 
+                    placeholder="Rate (mg/h)"
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+              </div>
+
+              <!-- IV Paralytic -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold">IV Paralytic:</label>
+                <div class="form-check">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    value="Rocuronium" 
+                    id="paralyticRocuronium"
+                  >
+                  <label class="form-check-label" for="paralyticRocuronium">
+                    Rocuronium (mg/h)
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="rocuroniumRate" 
+                    placeholder="Rate (mg/h)"
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Respiratory -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingResp">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseResp" 
+            aria-expanded="false" 
+            aria-controls="collapseResp"
+          >
+            3. Respiratory
+          </button>
+        </h2>
+        <div 
+          id="collapseResp" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingResp" 
+          data-bs-parent="#icuAccordion"
+        >
+              <div class="col-md-6">
+                <label class="form-label">Support Type</label>
+                <select class="form-select" id="respSupportType">
+                  <option value="">Choose...</option>
+                  <option value="mechanicalVentilation">Mechanical Ventilation</option>
+                  <option value="oxygenTherapy">O₂ Therapy (NC, mask, etc.)</option>
+                  <option value="nonInvasiveVentilation">Non-invasive (BiPAP)</option>
+                  <option value="highFlowNasalCannula">High-Flow NC</option>
+                  <option value="roomAir">Room Air</option>
+                </select>
+              </div>
+              <!-- Mechanical ventilation specifics -->
+              <div class="col-md-3">
+                <label for="ventMode" class="form-label">Vent Mode</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="ventMode" 
+                  placeholder="e.g. AC, SIMV"
+                >
+              </div>
+              <div class="col-md-3">
+                <label for="fio2" class="form-label">FiO₂ (%)</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="fio2"
+                  placeholder="e.g. 50"
+                >
+              </div>
+              <div class="col-md-3">
+                <label for="peep" class="form-label">PEEP (cmH₂O)</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="peep" 
+                  placeholder="e.g. 8"
+                >
+              </div>
+              <div class="col-md-3">
+                <label for="pressures" class="form-label">Pressures / Settings</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="pressures" 
+                  placeholder="Peak, plateau, PS..."
+                >
+              </div>
+              <div class="col-md-6">          <div class="accordion-body">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label for="tidalVolume" class="form-label">Tidal Volume (mL)</label>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="tidalVolume" 
+                      placeholder="e.g. 500"
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <label for="respRate" class="form-label">Respiratory Rate (breaths/min)</label>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="respRate" 
+                      placeholder="e.g. 14"
+                    >
+                  </div>
+                  <div class="col-md-4">
+                    <label for="inspTime" class="form-label">Inspiratory Time (sec)</label>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="inspTime" 
+                      placeholder="e.g. 1"
+                    >
+                  </div>
+                    <label for="respExam" class="form-label">
+                      Respiratory Exam / Weaning Status
+                    </label>
+                    <textarea 
+                      class="form-control" 
+                      id="respExam" 
+                      rows="3"
+                      placeholder="Auscultation, secretions, SBT trials..."
+                    ></textarea>
+                  </div>    
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Cardiovascular (CVS) -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingCVS">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseCVS" 
+            aria-expanded="false" 
+            aria-controls="collapseCVS"
+          >
+            4. Cardiovascular (CVS)
+          </button>
+        </h2>
+        <div 
+          id="collapseCVS" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingCVS" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <div class="row g-3">
+              <div class="col-md-3">
+                <label for="bp" class="form-label">Blood Pressure / MAP</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="bp" 
+                  placeholder="e.g. 110/70 (MAP 83)"
+                >
+              </div>
+              <div class="col-md-3">
+                <label for="hr" class="form-label">Heart Rate / Rhythm</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="hr" 
+                  placeholder="e.g. 90 bpm, sinus"
+                >
+              </div>
+
+              <!-- Vasoactive / inotropes -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold">
+                  Vasoactive / Inotropic Support (select any that apply):
+                </label>
+
+                <!-- Noradrenaline -->
+                <div class="form-check">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="vasoNorad" 
+                    value="Noradrenaline"
+                  >
+                  <label class="form-check-label" for="vasoNorad">
+                    Noradrenaline (mcg/min)
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="noradRate" 
+                    placeholder="Rate (mcg/min)" 
+                    style="max-width: 200px;" 
+                    disabled
+                  >
+                </div>
+
+                <!-- Vasopressin -->
+                <div class="form-check mt-2">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="vasoVasopressin" 
+                    value="Vasopressin"
+                  >
+                  <label class="form-check-label" for="vasoVasopressin">
+                    Vasopressin (units/hour)
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="vasopressinRate" 
+                    placeholder="Units/hour"
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+
+                <!-- Dopamine -->
+                <div class="form-check mt-2">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="vasoDopamine" 
+                    value="Dopamine"
+                  >
+                  <label class="form-check-label" for="vasoDopamine">
+                    Dopamine (mcg/kg/min)*
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="dopamineRate" 
+                    placeholder="mcg/kg/min" 
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+
+                <!-- Adrenaline -->
+                <div class="form-check mt-2">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="vasoAdrenaline" 
+                    value="Adrenaline"
+                  >
+                  <label class="form-check-label" for="vasoAdrenaline">
+                    Adrenaline (mcg/min)
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="adrenalineRate" 
+                    placeholder="Rate (mcg/min)"
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+
+                <!-- Dobutamine -->
+                <div class="form-check mt-2">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="vasoDobutamine" 
+                    value="Dobutamine"
+                  >
+                  <label class="form-check-label" for="vasoDobutamine">
+                    Dobutamine (mcg/kg/min)*
+                  </label>
+                  <input 
+                    type="number" 
+                    class="form-control mt-1" 
+                    id="dobutamineRate" 
+                    placeholder="mcg/kg/min"
+                    style="max-width: 200px;"
+                    disabled
+                  >
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="cardiacExam" class="form-label">Cardiac Exam</label>
+                <textarea 
+                  class="form-control" 
+                  id="cardiacExam" 
+                  rows="3"
+                  placeholder="Heart sounds, perfusion, edema..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Renal / Urine / Fluid -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingRenal">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseRenal" 
+            aria-expanded="false" 
+            aria-controls="collapseRenal"
+          >
+            5. Renal / Urine / Fluid Management
+          </button>
+        </h2>
+        <div 
+          id="collapseRenal" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingRenal" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="urineOutput" class="form-label">
+                  Urine Output (mL/hr or 24h)
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="urineOutput" 
+                  placeholder="e.g. 30 mL/hr"
+                >
+              </div>
+              <div class="col-md-4">
+                <label for="fluidBalance" class="form-label">
+                  Fluid Balance (24h)
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="fluidBalance" 
+                  placeholder="e.g. +500 mL / -200 mL"
+                >
+              </div>
+              <div class="col-md-4">
+                <label for="diuretics" class="form-label">Diuretics</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="diuretics"
+                  placeholder="e.g. Furosemide 40 mg IV"
+                >
+              </div>
+              <div class="col-md-6">
+                <label for="ivFluids" class="form-label">IV Fluids</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="ivFluids" 
+                  placeholder="Type, rate, total volume"
+                >
+              </div>
+
+              <!-- CRRT details -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold">CRRT Details:</label>
+                <div class="row g-2">
+                  <div class="col-12">
+                    <label for="crrtType" class="form-label">Type</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="crrtType"
+                      placeholder="e.g. CVVH, CVVHD..."
+                    >
+                  </div>
+                  <div class="col-6">
+                    <label for="bloodFlow" class="form-label">Blood Flow (mL/min)</label>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="bloodFlow" 
+                      placeholder="e.g. 150"
+                    >
+                  </div>
+                  <div class="col-6">
+                    <label for="dialysateRate" class="form-label">
+                      Dialysate (L/hr)
+                    </label>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="dialysateRate" 
+                      placeholder="e.g. 1"
+                    >
+                  </div>
+                  <div class="col-6">
+                    <label for="replacementRate" class="form-label">
+                      Replacement (L/hr)
+                    </label>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="replacementRate" 
+                      placeholder="e.g. 1"
+                    >
+                  </div>
+                  <div class="col-6">
+                    <label for="ufrRate" class="form-label">
+                      UFR (mL/hr)
+                    </label>
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="ufrRate" 
+                      placeholder="e.g. 200"
+                    >
+                  </div>
+                  <div class="col-12">
+                    <label for="crrtAnticoagulant" class="form-label">
+                      CRRT Anticoagulant
+                    </label>
+                    <select class="form-select" id="crrtAnticoagulant">
+                      <option value="">None / Free</option>
+                      <option value="Heparin">Heparin</option>
+                    </select>
+                    <input 
+                      type="number" 
+                      class="form-control mt-2" 
+                      id="heparinRateCRRT" 
+                      placeholder="Heparin IU/hr" 
+                      style="max-width: 200px;" 
+                      disabled
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. GI / Nutrition -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingGI">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseGI" 
+            aria-expanded="false" 
+            aria-controls="collapseGI"
+          >
+            6. Gastrointestinal (GI) / Nutrition
+          </button>
+        </h2>
+        <div 
+          id="collapseGI" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingGI" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="nutrition" class="form-label">Feeding Status</label>
+                <select class="form-select" id="nutrition">
+                  <option value="">Choose...</option>
+                  <option value="npo">NPO</option>
+                  <option value="ngt">NGT Feed</option>
+                  <option value="oral">Oral Intake</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="feedingDetails" class="form-label">
+                  Feeding Details
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="feedingDetails"
+                  placeholder="Rate, formula, type of diet"
+                >
+              </div>
+              <div class="col-md-6">
+                <label for="bowelMovement" class="form-label">Bowel Movement</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="bowelMovement" 
+                  placeholder="Last BM, consistency..."
+                >
+              </div>
+
+              <!-- PPI Options -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold">
+                  PPI / GI Prophylaxis:
+                </label>
+                <select class="form-select mb-2" id="ppiName">
+                  <option value="">Select PPI...</option>
+                  <option value="Omeprazole">Omeprazole</option>
+                  <option value="Esomeprazole">Esomeprazole</option>
+                  <option value="Pantoprazole">Pantoprazole</option>
+                </select>
+                <select class="form-select mb-2" id="ppiDose">
+                  <option value="">Select Dose...</option>
+                  <option value="20mg">20 mg</option>
+                  <option value="40mg">40 mg</option>
+                  <option value="80mg">80 mg</option>
+                </select>
+                <!-- Route & Timing -->
+                <select class="form-select mb-2" id="ppiRoute">
+                  <option value="">Route...</option>
+                  <option value="PO">PO</option>
+                  <option value="IV">IV</option>
+                </select>
+                <select class="form-select mb-2" id="ppiTiming">
+                  <option value="">Timing...</option>
+                  <option value="Daily">Daily</option>
+                  <option value="BID">BID</option>
+                  <option value="TID">TID</option>
+                </select>
+
+                <!-- If infusion, show infusion rate options -->
+                <label class="form-label">If Infusion (mg/hour):</label>
+                <select class="form-select" id="ppiInfusionRate">
+                  <option value="">Not on infusion</option>
+                  <option value="4mg/h">4 mg/h</option>
+                  <option value="8mg/h">8 mg/h</option>
+                  <option value="16mg/h">16 mg/h</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Blood Glucose Control -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingBG">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseBG" 
+            aria-expanded="false" 
+            aria-controls="collapseBG"
+          >
+            7. Blood Glucose Control
+          </button>
+        </h2>
+        <div 
+          id="collapseBG" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingBG" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="rbs" class="form-label">
+                  Current Blood Sugar (mg/dL)
+                </label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="rbs"
+                  placeholder="e.g. 180"
+                >
+              </div>
+              <div class="col-md-8">
+                <label for="insulinTherapy" class="form-label">
+                  Insulin Therapy
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="insulinTherapy" 
+                  placeholder="Infusion rate, sliding scale, long-acting..."
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Anticoagulant -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingAnticoagulant">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseAnticoagulant" 
+            aria-expanded="false" 
+            aria-controls="collapseAnticoagulant"
+          >
+            8. Anticoagulant
+          </button>
+        </h2>
+        <div 
+          id="collapseAnticoagulant" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingAnticoagulant" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Indication:</label>
+                <select class="form-select" id="anticoagIndication">
+                  <option value="">Choose...</option>
+                  <option value="Prophylactic">Prophylactic</option>
+                  <option value="Therapeutic">Therapeutic</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-bold">
+                  Anticoagulant Options:
+                </label>
+                <select class="form-select" id="anticoagulantChoice">
+                  <option value="">None</option>
+                  <option value="Heparin SC">Heparin SC</option>
+                  <option value="Enoxaparin">Enoxaparin</option>
+                </select>
+              </div>
+              <!-- Heparin SC details -->
+              <div class="col-md-6">
+                <label for="heparinSCdose" class="form-label">
+                  Heparin SC (IU per injection)
+                </label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="heparinSCdose" 
+                  placeholder="e.g. 5000 IU"
+                  disabled
+                >
+                <select class="form-select mt-2" id="heparinFrequency" disabled>
+                  <option value="">Frequency...</option>
+                  <option value="BID">BID (twice daily)</option>
+                  <option value="TID">TID (three times daily)</option>
+                </select>
+              </div>
+              <!-- Enoxaparin details -->
+              <div class="col-md-6">
+                <label for="enoxaparinDose" class="form-label">
+                  Enoxaparin (mg)
+                </label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="enoxaparinDose" 
+                  placeholder="e.g. 40 mg"
+                  disabled
+                >
+                <select class="form-select mt-2" id="enoxaparinFrequency" disabled>
+                  <option value="">Frequency...</option>
+                  <option value="OnceDaily">Once daily</option>
+                  <option value="TwiceDaily">Twice daily</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Antibiotics / Anti-Infectives -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingAntibiotics">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseAntibiotics" 
+            aria-expanded="false" 
+            aria-controls="collapseAntibiotics"
+          >
+            9. Antibiotics / Anti-Infectives
+          </button>
+        </h2>
+        <div 
+          id="collapseAntibiotics" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingAntibiotics" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <div class="row g-3">
+              <div class="col-md-3">
+                <label for="abxStartDay" class="form-label">
+                  Starting Day (of antibiotic)
+                </label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="abxStartDay" 
+                  placeholder="e.g. Day 2"
+                >
+              </div>
+              <div class="col-md-4">
+                <label for="abxName" class="form-label">Antibiotic Name</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="abxName" 
+                  placeholder="e.g. Piperacillin-Tazo"
+                >
+              </div>
+              <div class="col-md-3">
+                <label for="abxDose" class="form-label">Dosage</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="abxDose" 
+                  placeholder="e.g. 4.5 g q6h"
+                >
+              </div>
+              <div class="col-md-2">
+                <label for="abxRoute" class="form-label">Route</label>
+                <select class="form-select" id="abxRoute">
+                  <option value="">Choose...</option>
+                  <option value="IV">IV</option>
+                  <option value="PO">PO</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="antibiotics" class="form-label">
+                  Additional Antibiotics / Notes
+                </label>
+                <textarea 
+                  class="form-control" 
+                  id="antibiotics" 
+                  rows="2"
+                  placeholder="List other antibiotics, durations..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Investigations & Results -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingInvestigations">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseInvestigations" 
+            aria-expanded="false" 
+            aria-controls="collapseInvestigations"
+          >
+            10. Investigations & Results
+          </button>
+        </h2>
+        <div 
+          id="collapseInvestigations" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingInvestigations" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <div class="row g-3">
+              <!-- Radiology -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Radiology / Imaging:</label>
+                <div class="mb-2">
+                  <select class="form-select mb-1" id="radiologyType">
+                    <option value="">Type of Image...</option>
+                    <option value="X-Ray">X-Ray</option>
+                    <option value="CT">CT</option>
+                    <option value="MRI">MRI</option>
+                    <option value="Ultrasound">Ultrasound</option>
+                  </select>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="radiologySite" 
+                    placeholder="Site (e.g. Chest, Abdomen)" 
+                  >
+                </div>
+                <textarea 
+                  class="form-control" 
+                  id="radiologySummary" 
+                  rows="2"
+                  placeholder="Summary of findings"
+                ></textarea>
+              </div>
+
+              <!-- Microbiology -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold">
+                  Microbiology (Blood, Urine, Sputum, etc.)
+                </label>
+                <textarea 
+                  class="form-control" 
+                  id="microbiology" 
+                  rows="3"
+                  placeholder="Culture results, pathogens, sensitivities..."
+                ></textarea>
+              </div>
+
+              <!-- Blood Gas -->
+              <div class="col-md-6">
+                <label for="bloodGas" class="form-label fw-bold">
+                  Blood Gas (ABG / VBG)
+                </label>
+                <textarea 
+                  class="form-control" 
+                  id="bloodGas" 
+                  rows="2"
+                  placeholder="pH, pCO₂, pO₂, HCO₃, lactate..."
+                ></textarea>
+              </div>
+
+              <!-- Lines -->
+              <div class="col-md-6">
+                <label for="lines" class="form-label fw-bold">Lines / Catheters</label>
+                <p class="small mb-1">(Multiple choices possible)</p>
+                <div class="form-check">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="lineCentral"
+                  >
+                  <label class="form-check-label" for="lineCentral">
+                    Central Line
+                  </label>
+                  <input 
+                    type="date" 
+                    class="form-control mt-1" 
+                    id="centralDate" 
+                    placeholder="Date Inserted"
+                    disabled
+                  >
+                </div>
+                <div class="form-check mt-2">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="lineHDcatheter"
+                  >
+                  <label class="form-check-label" for="lineHDcatheter">
+                    HD Catheter
+                  </label>
+                  <input 
+                    type="date" 
+                    class="form-control mt-1" 
+                    id="hdCatheterDate" 
+                    placeholder="Date Inserted"
+                    disabled
+                  >
+                </div>
+                <div class="form-check mt-2">
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="lineFoley"
+                  >
+                  <label class="form-check-label" for="lineFoley">
+                    Foley's Catheter
+                  </label>
+                  <input 
+                    type="date" 
+                    class="form-control mt-1" 
+                    id="foleyDate" 
+                    placeholder="Date Inserted"
+                    disabled
+                  >
+                </div>
+              </div>
+
+              <!-- Lab Results -->
+              <div class="col-md-6">
+                <label for="labResults" class="form-label fw-bold">
+                  Lab Results (CBC, Renal, LFT, Electrolytes, Coag, etc.)
+                </label>
+                <textarea 
+                  class="form-control" 
+                  id="labResults" 
+                  rows="3"
+                  placeholder="WBC, Hb, Platelets, Creat, Urea, ALT, AST, Na, K, PT/INR..."
+                ></textarea>
+              </div>
+
+              <!-- Other Tests -->
+              <div class="col-md-6">
+                <label for="otherTests" class="form-label fw-bold">
+                  Other Tests (Hormonal, Viral, Immunology, etc.)
+                </label>
+                <textarea 
+                  class="form-control" 
+                  id="otherTests" 
+                  rows="2"
+                  placeholder="Any specialized or additional tests"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Current Medications -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingMeds">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseMeds" 
+            aria-expanded="false" 
+            aria-controls="collapseMeds"
+          >
+            11. Current Medications
+          </button>
+        </h2>
+        <div 
+          id="collapseMeds" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingMeds" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <textarea 
+              class="form-control" 
+              id="currentMedications" 
+              rows="3"
+              placeholder="List all medications, doses, routes, etc."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. Today's Plan -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingPlan">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapsePlan" 
+            aria-expanded="false" 
+            aria-controls="collapsePlan"
+          >
+            12. Today's Plan
+          </button>
+        </h2>
+        <div 
+          id="collapsePlan" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingPlan" 
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+            <textarea 
+              class="form-control" 
+              id="todaysPlan" 
+              rows="4"
+              placeholder="Plan for the next 24h, interventions, consults, etc."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Accordion -->
+
+    <!-- Final Submit Button -->
+    <div class="text-center mb-4">
+        <button type="button" class="btn btn-success" id="generateSummaryBtn">
+            Generate Text Summary
+          </button>          
+    </div>
+  </form>
+  <!-- END FORM -->
+
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script 
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<!-- Inline JavaScript (or move to script.js) -->
+<script>
+// Grab the main form
+const icuForm = document.getElementById('icuForm');
+
+// 1. Enable/disable rate inputs for analgesia, sedation, etc.
+const analgesiaFentanyl = document.getElementById('analgesiaFentanyl');
+const fentanylRate = document.getElementById('fentanylRate');
+analgesiaFentanyl.addEventListener('change', () => {
+  fentanylRate.disabled = !analgesiaFentanyl.checked;
+});
+
+const analgesiaKetamine = document.getElementById('analgesiaKetamine');
+const ketamineRate = document.getElementById('ketamineRate');
+analgesiaKetamine.addEventListener('change', () => {
+  ketamineRate.disabled = !analgesiaKetamine.checked;
+});
+
+const sedationMidazolam = document.getElementById('sedationMidazolam');
+const midazolamRate = document.getElementById('midazolamRate');
+sedationMidazolam.addEventListener('change', () => {
+  midazolamRate.disabled = !sedationMidazolam.checked;
+});
+
+const sedationPropofol = document.getElementById('sedationPropofol');
+const propofolRate = document.getElementById('propofolRate');
+sedationPropofol.addEventListener('change', () => {
+  propofolRate.disabled = !sedationPropofol.checked;
+});
+
+const paralyticRocuronium = document.getElementById('paralyticRocuronium');
+const rocuroniumRate = document.getElementById('rocuroniumRate');
+paralyticRocuronium.addEventListener('change', () => {
+  rocuroniumRate.disabled = !paralyticRocuronium.checked;
+});
+
+// 2. Vasoactive checkboxes
+const vasoNorad = document.getElementById('vasoNorad');
+const noradRate = document.getElementById('noradRate');
+vasoNorad.addEventListener('change', () => {
+  noradRate.disabled = !vasoNorad.checked;
+});
+
+const vasoVasopressin = document.getElementById('vasoVasopressin');
+const vasopressinRate = document.getElementById('vasopressinRate');
+vasoVasopressin.addEventListener('change', () => {
+  vasopressinRate.disabled = !vasoVasopressin.checked;
+});
+
+const vasoDopamine = document.getElementById('vasoDopamine');
+const dopamineRate = document.getElementById('dopamineRate');
+vasoDopamine.addEventListener('change', () => {
+  dopamineRate.disabled = !vasoDopamine.checked;
+});
+
+const vasoAdrenaline = document.getElementById('vasoAdrenaline');
+const adrenalineRate = document.getElementById('adrenalineRate');
+vasoAdrenaline.addEventListener('change', () => {
+  adrenalineRate.disabled = !vasoAdrenaline.checked;
+});
+
+const vasoDobutamine = document.getElementById('vasoDobutamine');
+const dobutamineRate = document.getElementById('dobutamineRate');
+vasoDobutamine.addEventListener('change', () => {
+  dobutamineRate.disabled = !vasoDobutamine.checked;
+});
+
+// 3. CRRT Anticoagulant
+const crrtAnticoagulant = document.getElementById('crrtAnticoagulant');
+const heparinRateCRRT = document.getElementById('heparinRateCRRT');
+crrtAnticoagulant.addEventListener('change', () => {
+  if (crrtAnticoagulant.value === 'Heparin') {
+    heparinRateCRRT.disabled = false;
+  } else {
+    heparinRateCRRT.disabled = true;
+    heparinRateCRRT.value = '';
+  }
+});
+
+// 4. Anticoagulant Options
+const anticoagulantChoice = document.getElementById('anticoagulantChoice');
+const heparinSCdose = document.getElementById('heparinSCdose');
+const heparinFrequency = document.getElementById('heparinFrequency');
+const enoxaparinDose = document.getElementById('enoxaparinDose');
+const enoxaparinFrequency = document.getElementById('enoxaparinFrequency');
+
+anticoagulantChoice.addEventListener('change', () => {
+  if (anticoagulantChoice.value === 'Heparin SC') {
+    // Enable Heparin fields
+    heparinSCdose.disabled = false;
+    heparinFrequency.disabled = false;
+    // Disable Enoxaparin fields
+    enoxaparinDose.disabled = true;
+    enoxaparinFrequency.disabled = true;
+    enoxaparinDose.value = '';
+    enoxaparinFrequency.value = '';
+  } else if (anticoagulantChoice.value === 'Enoxaparin') {
+    // Enable Enoxaparin fields
+    enoxaparinDose.disabled = false;
+    enoxaparinFrequency.disabled = false;
+    // Disable Heparin fields
+    heparinSCdose.disabled = true;
+    heparinFrequency.disabled = true;
+    heparinSCdose.value = '';
+    heparinFrequency.value = '';
+  } else {
+    // None
+    heparinSCdose.disabled = true;
+    heparinFrequency.disabled = true;
+    heparinSCdose.value = '';
+    heparinFrequency.value = '';
+    enoxaparinDose.disabled = true;
+    enoxaparinFrequency.disabled = true;
+    enoxaparinDose.value = '';
+    enoxaparinFrequency.value = '';
+  }
+});
+
+// 5. Lines checkboxes
+const lineCentral = document.getElementById('lineCentral');
+const centralDate = document.getElementById('centralDate');
+lineCentral.addEventListener('change', () => {
+  centralDate.disabled = !lineCentral.checked;
+  if (!lineCentral.checked) centralDate.value = '';
+});
+
+const lineHDcatheter = document.getElementById('lineHDcatheter');
+const hdCatheterDate = document.getElementById('hdCatheterDate');
+lineHDcatheter.addEventListener('change', () => {
+  hdCatheterDate.disabled = !lineHDcatheter.checked;
+  if (!lineHDcatheter.checked) hdCatheterDate.value = '';
+});
+
+const lineFoley = document.getElementById('lineFoley');
+const foleyDate = document.getElementById('foleyDate');
+lineFoley.addEventListener('change', () => {
+  foleyDate.disabled = !lineFoley.checked;
+  if (!lineFoley.checked) foleyDate.value = '';
+});
+
+// 6. Form Submit Handler
+icuForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent page refresh
+
+  // Collect form data
+  const formData = new FormData(icuForm);
+
+  // Log data for demonstration
+  console.log('--- ICU Progress Note Data ---');
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
+  alert('ICU Progress Note submitted! Check console for data.');
+});
+</script>
+</body>
+</html>
