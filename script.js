@@ -15,6 +15,14 @@ icuForm.addEventListener('submit', function(event) {
   for (let [name, value] of formData.entries()) {
     console.log(`${name}: ${value}`);
   }
+// Checkbox + numeric input references
+const ivFluidsRateCheck = document.getElementById('ivFluidsRateCheck');
+const ivFluidsRateInput = document.getElementById('ivFluidsRateInput');
+
+// Enable/disable the input based on checkbox
+ivFluidsRateCheck.addEventListener('change', () => {
+  ivFluidsRateInput.disabled = !ivFluidsRateCheck.checked;
+});
 
   // You can add your own logic here, for example:
   // 1) Send data to a server via fetch/AJAX

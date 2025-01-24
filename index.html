@@ -1011,126 +1011,129 @@
       </div>
 
       <!-- 9. Antibiotics / Anti-Infectives -->
-<div class="accordion-item">
-    <h2 class="accordion-header" id="headingAntibiotics">
-      <button
-        class="accordion-button collapsed"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseAntibiotics"
-        aria-expanded="false"
-        aria-controls="collapseAntibiotics"
-      >
-        9. Antibiotics / Anti-Infectives
-      </button>
-    </h2>
-    <div
-      id="collapseAntibiotics"
-      class="accordion-collapse collapse"
-      aria-labelledby="headingAntibiotics"
-      data-bs-parent="#icuAccordion"
-    >
-      <div class="accordion-body">
-        <div class="row g-3">
-          
-          <!-- Common Antibiotics Dropdown -->
-          <div class="col-md-6">
-            <label for="abxCommonName" class="form-label">Common Antibiotic</label>
-            <select class="form-select" id="abxCommonName" name="abxCommonName">
-              <option value="">Choose...</option>
-              <option value="Piperacillin-Tazobactam">Piperacillin-Tazobactam</option>
-              <option value="Ceftriaxone">Ceftriaxone</option>
-              <option value="Cefepime">Cefepime</option>
-              <option value="Meropenem">Meropenem</option>
-              <option value="Vancomycin">Vancomycin</option>
-              <option value="Linezolid">Linezolid</option>
-              <option value="Levofloxacin">Levofloxacin</option>
-              <option value="Cefuroxime">Cefuroxime</option>
-              <option value="Gentamycin">Gentamycin</option>
-              <option value="Metronidazole">Metronidazole</option>
-              <option value="Cefazolin">Cefazolin</option>
-              <option value="Erythromycin">Erythromycin</option>
-              <option value="Clindamycin">Clindamycin</option>
-              <option value="Amoxicillin/clavulanate">Amoxicillin/clavulanate</option>
-              <option value="Imipenem">Imipenem</option>
-              <option value="Imipenem/cilastatin">Imipenem/cilastatin</option>
-              <option value="Ceftazidime">Ceftazidime</option>
-              <option value="Ciprofloxacin">Ciprofloxacin</option>
-              <option value="Colistin">Colistin</option>
-              <!-- Add more as needed -->
-            </select>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingAntibiotics">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseAntibiotics"
+            aria-expanded="true"
+            aria-controls="collapseAntibiotics"
+          >
+            9. Antibiotics / Anti-Infectives
+          </button>
+        </h2>
+        <div
+          id="collapseAntibiotics"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingAntibiotics"
+          data-bs-parent="#icuAccordion"
+        >
+          <div class="accordion-body">
+
+            <!-- Container where antibiotic rows will be appended -->
+            <div id="antibioticsContainer"></div>
+
+            <!-- Hidden Template (to be cloned) -->
+            <div id="antibioticTemplate" class="d-none">
+              <div class="antibiotic-row row g-3 border p-2 mb-3">
+                <div class="col-md-4">
+                  <label class="form-label">Antibiotic Name</label>
+                  <select class="form-select abxName" name="abxName[]">
+                    <option value="Piperacillin-Tazobactam">Piperacillin-Tazobactam</option>
+                    <option value="Ceftriaxone">Ceftriaxone</option>
+                    <option value="Cefepime">Cefepime</option>
+                    <option value="Meropenem">Meropenem</option>
+                    <option value="Vancomycin">Vancomycin</option>
+                    <option value="Linezolid">Linezolid</option>
+                    <option value="Levofloxacin">Levofloxacin</option>
+                    <option value="Cefuroxime">Cefuroxime</option>
+                    <option value="Gentamycin">Gentamycin</option>
+                    <option value="Metronidazole">Metronidazole</option>
+                    <option value="Cefazolin">Cefazolin</option>
+                    <option value="Erythromycin">Erythromycin</option>
+                    <option value="Clindamycin">Clindamycin</option>
+                    <option value="Amoxicillin/clavulanate">Amoxicillin/clavulanate</option>
+                    <option value="Imipenem">Imipenem</option>
+                    <option value="Imipenem/cilastatin">Imipenem/cilastatin</option>
+                    <option value="Ceftazidime">Ceftazidime</option>
+                    <option value="Ciprofloxacin">Ciprofloxacin</option>
+                    <option value="Colistin">Colistin</option>
+                    <option value="Acyclovir">Acyclovir</option>
+                    <option value="Oseltamivir(Tamiflu)">Oseltamivir(Tamiflu)</option>
+                    <option value="Anidulafungin(Ecalta)">Anidulafungin(Ecalta)</option>
+                    <option value="Caspofungin">Caspofungin</option>
+                    <option value="Amphotericin B">Amphotericin B</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Dose</label>
+                  <input
+                    type="text"
+                    class="form-control abxDose"
+                    name="abxDose[]"
+                    placeholder="e.g. 4.5 g"
+                  >
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Route</label>
+                  <select class="form-select abxRoute" name="abxRoute[]">
+                    <option value="">Choose...</option>
+                    <option value="IV">IV</option>
+                    <option value="PO">PO</option>
+                    <option value="IM">IM</option>
+                    <option value="Neb">Neb</option>
+                  </select>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-label">Timing</label>
+                  <select class="form-select abxTiming" name="abxTiming[]">
+                    <option value="">Choose...</option>
+                    <option value="q4h">q4h</option>
+                    <option value="q6h">q6h</option>
+                    <option value="q8h">q8h</option>
+                    <option value="q12h">q12h</option>
+                    <option value="q24h">q24h</option>
+                    <option value="q48h">q48h</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Start Day</label>
+                  <input
+                    type="date"
+                    class="form-control abxStartDay"
+                    name="abxStartDay[]"
+                  >
+                </div>
+                <div class="col-md-12">
+                  <label class="form-label">Notes</label>
+                  <textarea
+                    class="form-control abxNotes"
+                    name="abxNotes[]"
+                    rows="1"
+                  ></textarea>
+                </div>
+                <!-- Remove button -->
+                <div class="col-md-12 text-end">
+                  <button type="button" class="btn btn-danger removeAntibioticBtn">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- End of hidden template -->
+
+            <!-- Button to add new antibiotic row -->
+            <button type="button" class="btn btn-secondary" id="addAntibioticBtn">
+              Add Another Antibiotic
+            </button>
+
           </div>
-  
-          <!-- Dose -->
-          <div class="col-md-3">
-            <label for="abxCommonDose" class="form-label">Dose</label>
-            <input
-              type="text"
-              class="form-control"
-              id="abxCommonDose"
-              name="abxCommonDose"
-              placeholder="e.g. 4.5 g"
-            >
-          </div>
-  
-          <!-- Route -->
-          <div class="col-md-3">
-            <label for="abxCommonRoute" class="form-label">Route</label>
-            <select class="form-select" id="abxCommonRoute" name="abxCommonRoute">
-              <option value="">Choose...</option>
-              <option value="IV">IV</option>
-              <option value="PO">PO</option>
-              <option value="IM">IM</option>
-              <option value="Neb">Neb</option>
-            </select>
-          </div>
-  
-          <!-- Timing/Frequency -->
-          <div class="col-md-3">
-            <label for="abxCommonTiming" class="form-label">Timing / Frequency</label>
-            <select class="form-select" id="abxCommonTiming" name="abxCommonTiming">
-              <option value="">Choose...</option>
-              <option value="q4h">q4h</option>
-              <option value="q6h">q6h</option>
-              <option value="q8h">q8h</option>
-              <option value="q12h">q12h</option>
-              <option value="q24h">q24h</option>
-              <option value="q48h">q48h</option>
-            </select>
-          </div>
-  
-          <!-- Starting Day (optional) -->
-          <div class="col-md-3">
-            <label for="abxStartDay" class="form-label">
-              Starting Day (optional)
-            </label>
-            <input
-              type="date"
-              class="form-control"
-              id="abxStartDay"
-              name="abxStartDay"
-              placeholder="date"
-            >
-          </div>
-  
-          <!-- Additional Notes (optional) -->
-          <div class="col-12">
-            <label for="abxNotes" class="form-label">
-              Additional Antibiotic Notes
-            </label>
-            <textarea
-              class="form-control"
-              id="abxNotes"
-              name="abxNotes"
-              rows="2"
-              placeholder="List any other antibiotics, durations, notes..."
-            ></textarea>
-          </div>
-  
-        </div> <!-- row g-3 -->
-      </div> <!-- accordion-body -->
-    </div> <!-- collapseAntibiotics -->
-  </div>
+        </div>
+      </div>
+      <!-- End of Antibiotics section -->
 
       <!-- 10. Investigations & Results -->
       <div class="accordion-item">
@@ -1554,30 +1557,43 @@ lineFoley.addEventListener('change', () => {
 });
 }
 
-// 6. Form Submit Handler (unchanged)
-icuForm.addEventListener('submit', function(event) {
-event.preventDefault(); // Prevent page refresh
+// 7) Add Another Antibiotic logic
+const antibioticTemplate = document.getElementById('antibioticTemplate');
+const antibioticsContainer = document.getElementById('antibioticsContainer');
+const addAntibioticBtn = document.getElementById('addAntibioticBtn');
 
-// Collect form data
-const formData = new FormData(icuForm);
+addAntibioticBtn.addEventListener('click', () => {
+  const clone = antibioticTemplate.cloneNode(true);
+  clone.classList.remove('d-none'); // Make it visible
+  const antibioticRow = clone.querySelector('.antibiotic-row');
+  antibioticsContainer.appendChild(antibioticRow);
 
-// Log data for demonstration
-console.log('--- ICU Progress Note Data ---');
-for (let [key, value] of formData.entries()) {
-  console.log(`${key}: ${value}`);
-}
-alert('ICU Progress Note submitted! Check console for data.');
+  // "Remove" button inside the cloned row
+  const removeBtn = antibioticRow.querySelector('.removeAntibioticBtn');
+  removeBtn.addEventListener('click', () => {
+    antibioticRow.remove();
+  });
 });
 
-// 7. NEW: Generate Text Summary Handler
+// 8) Submit event (for demonstration)
+
+icuForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent page refresh
+  const formData = new FormData(icuForm);
+
+  console.log('--- ICU Progress Note Data ---');
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
+  alert('ICU Progress Note submitted! Check console for data.');
+});
+
+// 9) Generate Text Summary Handler
 const generateSummaryBtn = document.getElementById('generateSummaryBtn');
-
 generateSummaryBtn.addEventListener('click', function() {
-// Gather form data
-const formData = new FormData(icuForm);
+  const formData = new FormData(icuForm);
 
-// Build a text summary
-let summary = "ICU PROGRESS NOTE - TEXT SUMMARY\n\n";
+  let summary = "ICU PROGRESS NOTE - TEXT SUMMARY\n\n";
 
 // Example: Patient Info
 summary += `Patient Name/ID: ${formData.get('patientName') || ''}\n`;
@@ -1743,14 +1759,28 @@ summary += "[ANALGESIA]\n";
   // ------------------------------------------------------------
   // 9. Antibiotics
   // ------------------------------------------------------------
-  summary += "[ANTIBIOTICS]\n";
-  summary += `Name: ${formData.get('abxCommonName') || ''}\n`;
-  summary += `Dose: ${formData.get('abxCommonDose') || ''}\n`;
-  summary += `Route: ${formData.get('abxCommonRoute') || ''}\n`;
-  summary += `Timing: ${formData.get('abxCommonTiming') || ''}\n`;
-  summary += `Start Day: ${formData.get('abxStartDay') || ''}\n`;
-  summary += `Notes: ${formData.get('abxNotes') || ''}\n\n`;
+  const abxNames     = formData.getAll('abxName[]');
+  const abxDoses     = formData.getAll('abxDose[]');
+  const abxRoutes    = formData.getAll('abxRoute[]');
+  const abxTimings   = formData.getAll('abxTiming[]');
+  const abxStartDays = formData.getAll('abxStartDay[]');
+  const abxNotes     = formData.getAll('abxNotes[]');
 
+  if (abxNames.length === 0) {
+    summary += "\nNo Antibiotics Added.\n";
+  } else {
+    summary += "\n[ANTIBIOTICS]\n";
+    for (let i = 0; i < abxNames.length; i++) {
+      summary += `\nAntibiotic #${i + 1}\n`;
+      summary += `Name: ${abxNames[i]}\n`;
+      summary += `Dose: ${abxDoses[i]}\n`;
+      summary += `Route: ${abxRoutes[i]}\n`;
+      summary += `Timing: ${abxTimings[i]}\n`;
+      summary += `Start Day: ${abxStartDays[i]}\n`;
+      summary += `Notes: ${abxNotes[i]}\n`;
+    }
+    summary += "\n";
+  }
   // ------------------------------------------------------------
   // 10. Investigations & Results
   // ------------------------------------------------------------
@@ -1803,14 +1833,12 @@ summary += "[ANALGESIA]\n";
   summary += `${formData.get('todaysPlan') || ''}\n\n`;
 
   // ------------------------------------------------------------
-  // Finally, open a new window with the entire summary
-  // ------------------------------------------------------------
+  // Finally open summary window
   const newWindow = window.open('', '_blank', 'width=800,height=600');
   if (!newWindow) {
     alert("Pop-up blocked! Please allow pop-ups to see the summary.");
     return;
   }
-
   newWindow.document.write(`
     <html>
       <head><title>ICU Progress Note Summary</title></head>
@@ -1822,5 +1850,6 @@ summary += "[ANALGESIA]\n";
   newWindow.document.close();
 });
 </script>
+
 </body>
 </html>
