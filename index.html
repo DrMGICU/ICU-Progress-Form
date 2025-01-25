@@ -1200,16 +1200,315 @@
               </div>
 
               <!-- Blood Gas -->
+              <div class="col-12 mb-3">
+                <h5 class="fw-bold">Blood Gas</h5>
+                <div class="row g-3">
+                  <!-- pH -->
+                  <div class="col-md-2">
+                    <label for="bgPH" class="form-label">pH</label>
+                    <input
+                      type="number"
+                      step="0.001"
+                      class="form-control"
+                      id="bgPH"
+                      name="bgPH"
+                      placeholder="7.40"
+                    >
+                  </div>
+                  <!-- pCO2 -->
+                  <div class="col-md-2">
+                    <label for="bgPCO2" class="form-label">pCO₂ (mmHg)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="bgPCO2"
+                      name="bgPCO2"
+                      placeholder="40"
+                    >
+                  </div>
+                  <!-- pO2 -->
+                  <div class="col-md-2">
+                    <label for="bgPO2" class="form-label">pO₂ (mmHg)</label>
+                    <input
+                      type="number"
+                      step="1"
+                      class="form-control"
+                      id="bgPO2"
+                      name="bgPO2"
+                      placeholder="90"
+                    >
+                  </div>
+                  <!-- HCO3 -->
+                  <div class="col-md-2">
+                    <label for="bgHCO3" class="form-label">HCO₃ (mEq/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="bgHCO3"
+                      name="bgHCO3"
+                      placeholder="24"
+                    >
+                  </div>
+                  <!-- Lactate -->
+                  <div class="col-md-2">
+                    <label for="bgLactate" class="form-label">Lactate (mmol/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="bgLactate"
+                      name="bgLactate"
+                      placeholder="1.2"
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- END Blood Gas -->
+
+              <!-- Lab Results -->
+              <div class="col-12 mb-3">
+                <h5 class="fw-bold">Lab Values</h5>
+      
+                <div class="row g-3">
+                  <!-- CBC: WBC, Hb, Platelets -->
+                  <div class="col-md-2">
+                    <label for="labWBC" class="form-label">WBC (×10³/µL)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labWBC"
+                      name="labWBC"
+                      placeholder="4-10"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labHb" class="form-label">Hb (g/dL)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labHb"
+                      name="labHb"
+                      placeholder="M. 13-17, F. 12-15"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labPLT" class="form-label">Platelets (×10³/µL)</label>
+                    <input
+                      type="number"
+                      step="1"
+                      class="form-control"
+                      id="labPLT"
+                      name="labPLT"
+                      placeholder="130-400"
+                    >
+                  </div>
+      
+                  <!-- BUN / Creatinine -->
+                  <div class="col-md-2">
+                    <label for="labBUN" class="form-label">BUN (mmol/L)</label>
+                    <input
+                      type="number"
+                      step="1"
+                      class="form-control"
+                      id="labBUN"
+                      name="labBUN"
+                      placeholder="3.2-7.1"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labCreatinine" class="form-label">Creat (umol/L)</label>
+                    <input
+                      type="number"
+                      step="1"
+                      class="form-control"
+                      id="labCreatinine"
+                      name="labCreatinine"
+                      placeholder="53-120"
+                    >
+                  </div>
+                </div> <!-- row g-3 1 -->
+      
+                <div class="row g-3 mt-2">
+                  <!-- Electrolytes: Na, K, Mg, Phosphorus, Cl, Ca -->
+                  <div class="col-md-2">
+                    <label for="labNa" class="form-label">Na (mmol/L)</label>
+                    <input
+                      type="number"
+                      step="1"
+                      class="form-control"
+                      id="labNa"
+                      name="labNa"
+                      placeholder="133-148"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labK" class="form-label">K (mmol/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labK"
+                      name="labK"
+                      placeholder="3.4-5.1"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labMg" class="form-label">Mg (mmol/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labMg"
+                      name="labMg"
+                      placeholder="0.6-1.1"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labPhos" class="form-label">Phosphorus (mmol/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labPhos"
+                      name="labPhos"
+                      placeholder="0.8-1.45"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labCl" class="form-label">Cl (mmol/L)</label>
+                    <input
+                      type="number"
+                      step="1"
+                      class="form-control"
+                      id="labCl"
+                      name="labCl"
+                      placeholder="98-107"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labCa" class="form-label">Ca (mmol/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labCa"
+                      name="labCa"
+                      placeholder="2.1-2.6"
+                    >
+                  </div>
+                </div> <!-- row g-3 2 -->
+      
+                <div class="row g-3 mt-2">
+                  <!-- Liver: T.Bil, D.Bil, AST, ALT, Albumin -->
+                  <div class="col-md-2">
+                    <label for="labTBil" class="form-label">T.Bil (umol/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labTBil"
+                      name="labTBil"
+                      placeholder="0-24"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labDBil" class="form-label">D.Bil (umol/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labDBil"
+                      name="labDBil"
+                      placeholder="2-5"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labAST" class="form-label">AST (U/L)</label>
+                    <input
+                      type="number"
+                      step="1"
+                      class="form-control"
+                      id="labAST"
+                      name="labAST"
+                      placeholder="15-46"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labALT" class="form-label">ALT (U/L)</label>
+                    <input
+                      type="number"
+                      step="1"
+                      class="form-control"
+                      id="labALT"
+                      name="labALT"
+                      placeholder="30-65"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labAlbumin" class="form-label">Albumin (g/L)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labAlbumin"
+                      name="labAlbumin"
+                      placeholder="35-50"
+                    >
+                  </div>
+                </div> <!-- row g-3 3 -->
+      
+                <div class="row g-3 mt-2">
+                  <!-- Coagulation: PT, PTT, INR -->
+                  <div class="col-md-2">
+                    <label for="labPT" class="form-label">PT (sec)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labPT"
+                      name="labPT"
+                      placeholder="9.8-13.2"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labPTT" class="form-label">PTT (sec)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      id="labPTT"
+                      name="labPTT"
+                      placeholder="26-36"
+                    >
+                  </div>
+                  <div class="col-md-2">
+                    <label for="labINR" class="form-label">INR</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      class="form-control"
+                      id="labINR"
+                      name="labINR"
+                      placeholder="0.9-1"
+                    >
+                  </div>
+                </div> <!-- row g-3 4 -->
+
+              <!-- Other Tests -->
               <div class="col-md-6">
-                <label for="bloodGas" class="form-label fw-bold">
-                  Blood Gas (ABG / VBG)
+                <label for="otherTests" class="form-label fw-bold">
+                  Other Tests (Hormonal, Viral, Immunology, etc.)
                 </label>
                 <textarea 
                   class="form-control" 
-                  id="bloodGas" 
-                  name="bloodGas"
+                  id="otherTests" 
+                  name="otherTests"
                   rows="2"
-                  placeholder="pH, pCO₂, pO₂, HCO₃, lactate..."
+                  placeholder="Any specialized or additional tests"
                 ></textarea>
               </div>
 
@@ -1274,34 +1573,6 @@
                     disabled
                   >
                 </div>
-              </div>
-
-              <!-- Lab Results -->
-              <div class="col-md-6">
-                <label for="labResults" class="form-label fw-bold">
-                  Lab Results (CBC, Renal, LFT, Electrolytes, Coag, etc.)
-                </label>
-                <textarea 
-                  class="form-control" 
-                  id="labResults" 
-                  name="labResults"
-                  rows="3"
-                  placeholder="WBC, Hb, Platelets, Creat, Urea, ALT, AST, Na, K, PT/INR..."
-                ></textarea>
-              </div>
-
-              <!-- Other Tests -->
-              <div class="col-md-6">
-                <label for="otherTests" class="form-label fw-bold">
-                  Other Tests (Hormonal, Viral, Immunology, etc.)
-                </label>
-                <textarea 
-                  class="form-control" 
-                  id="otherTests" 
-                  name="otherTests"
-                  rows="2"
-                  placeholder="Any specialized or additional tests"
-                ></textarea>
               </div>
             </div>
           </div>
@@ -1797,8 +2068,12 @@ summary += "[ANALGESIA]\n";
   summary += `${formData.get('microbiology') || ''}\n`;
 
   // Blood Gas
-  summary += "\n[Blood Gas]\n";
-  summary += `${formData.get('bloodGas') || ''}\n`;
+  summary += "\n[BLOOD GAS]\n";
+  summary += `pH: ${formData.get('bgPH') || ''}\n`;
+  summary += `pCO2: ${formData.get('bgPCO2') || ''}\n`;
+  summary += `pO2: ${formData.get('bgPO2') || ''}\n`;
+  summary += `HCO3: ${formData.get('bgHCO3') || ''}\n`;
+  summary += `Lactate: ${formData.get('bgLactate') || ''}\n`;
 
   // Lines
   summary += "\n[Lines / Catheters]\n";
@@ -1816,7 +2091,26 @@ summary += "[ANALGESIA]\n";
   }
 
   // Lab Results
-  summary += `\nLab Results: ${formData.get('labResults') || ''}\n`;
+  summary += "\n[LAB VALUES]\n";
+  summary += `WBC: ${formData.get('labWBC') || ''}\n`;
+  summary += `Hb: ${formData.get('labHb') || ''}\n`;
+  summary += `Platelets: ${formData.get('labPLT') || ''}\n`;
+  summary += `BUN: ${formData.get('labBUN') || ''}\n`;
+  summary += `Creatinine: ${formData.get('labCreatinine') || ''}\n`;
+  summary += `Na: ${formData.get('labNa') || ''}\n`;
+  summary += `K: ${formData.get('labK') || ''}\n`;
+  summary += `Mg: ${formData.get('labMg') || ''}\n`;
+  summary += `Phosphorus: ${formData.get('labPhos') || ''}\n`;
+  summary += `Cl: ${formData.get('labCl') || ''}\n`;
+  summary += `Ca: ${formData.get('labCa') || ''}\n`;
+  summary += `T.Bil: ${formData.get('labTBil') || ''}\n`;
+  summary += `D.Bil: ${formData.get('labDBil') || ''}\n`;
+  summary += `AST: ${formData.get('labAST') || ''}\n`;
+  summary += `ALT: ${formData.get('labALT') || ''}\n`;
+  summary += `Albumin: ${formData.get('labAlbumin') || ''}\n`;
+  summary += `PT: ${formData.get('labPT') || ''}\n`;
+  summary += `PTT: ${formData.get('labPTT') || ''}\n`;
+  summary += `INR: ${formData.get('labINR') || ''}\n\n`;
   // Other Tests
   summary += `Other Tests: ${formData.get('otherTests') || ''}\n\n`;
 
